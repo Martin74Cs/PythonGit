@@ -1,0 +1,16 @@
+[
+    {
+        "Person": {
+            "jmeno": "Martin",
+            "age": 49,
+            "city": "\u00dast\u00ed nad Labem"
+        }
+    },
+    {
+        "Person": {
+            "jmeno": "Alena",
+            "age": 35,
+            "city": "\u00dast\u00ed nad Labem"
+        }
+    }
+]
