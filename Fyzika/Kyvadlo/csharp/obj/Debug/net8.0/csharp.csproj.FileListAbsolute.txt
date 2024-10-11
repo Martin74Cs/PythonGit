@@ -1,0 +1,14 @@
+C:\VisualStudio\Python\cURSOR\csharp\bin\Debug\net8.0\csharp.exe
+C:\VisualStudio\Python\cURSOR\csharp\bin\Debug\net8.0\csharp.deps.json
+C:\VisualStudio\Python\cURSOR\csharp\bin\Debug\net8.0\csharp.runtimeconfig.json
+C:\VisualStudio\Python\cURSOR\csharp\bin\Debug\net8.0\csharp.dll
+C:\VisualStudio\Python\cURSOR\csharp\bin\Debug\net8.0\csharp.pdb
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.AssemblyInfoInputs.cache
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.AssemblyInfo.cs
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.csproj.CoreCompileInputs.cache
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.dll
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\refint\csharp.dll
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.pdb
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\csharp.genruntimeconfig.cache
+C:\VisualStudio\Python\cURSOR\csharp\obj\Debug\net8.0\ref\csharp.dll

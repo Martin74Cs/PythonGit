@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Průběh Ohybového Momentu na Nosníku</title>
+    <!-- Import Plotly.js z CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        #plot {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Průběh Ohybového Momentu na Podepřeném Nosníku</h2>
+<div id="plot"></div>
+
+<script>
+// Definování konstant
+let q = 80917.44589226524;  // intenzita spojitého zatížení (N/m)
+let Delka = 20;              // celková délka nosníku (m)
+let a = 2.5;                   // vzdálenost první podpěry od levého konce (m)
+let c = 2.5;                   // vzdálenost druhé podpěry od levého konce (m)
+
+// Výpočet ostatních parametrů
+let b = Delka - a - c;
+
+// Výpočet reakcí v podporách
+// Ra = (q * (a + c - b)) / 2
+// Rb = (q * (b + c - a)) / 2
+// Pokud a = 0 a c = 0, pak Ra = Rb = q * b / 2
+//Rb = q /(2 * b) * (( b + c )**2 - a**2)
+//Ra = q * Delka - Rb
+
+let rba = q / (2 * b) 
+let rbb = Math.pow((b + c), 2)
+let rbc = Math.pow(a, 2) ;
+let Rb = q / (2 * b)  * (Math.pow((b + c), 2) - Math.pow(a, 2));
+let Ra = q * Delka - Rb
+
+// Funkce pro výpočet ohybového momentu na úsecích nosníku
+function moment_0_a(x) {
+    return - (q * Math.pow(x, 2) / 2);
+}
+
+function moment_a_b(x) {
+    return - (q / 2 * Math.pow(x, 2)) + Ra * (x - a);
+    // return  - q / 2 * x**2 + Ra * (x-a)
+}
+
+function moment_b_L(x) {
+    return - (q / 2) * Math.pow(x, 2) + Ra * (x - a) + Rb * (x - a - b);
+}
+
+// Diskretizace délky nosníku
+const numPoints = 100;
+let x1 = Array.from({length: numPoints}, (_, i) => a > 0 ? (a > 0 ? i * a / (numPoints - 1) : 0) : 0);
+let x2 = Array.from({length: numPoints}, (_, i) => a + i * (Delka - c - a) / (numPoints - 1));
+let x3 = Array.from({length: numPoints}, (_, i) => Delka - c + i * c / (numPoints - 1));
+
+// Výpočty momentů
+let M1 = x1.map(x => moment_0_a(x));
+let M2 = x2.map(x => moment_a_b(x));
+let M3 = x3.map(x => moment_b_L(x));
+
+// Spojení všech úseků do jednoho grafu
+const x_total = x1.concat(x2, x3);
+const M_total = M1.concat(M2, M3);
+//var x_total = x1.concat(x2, x3);
+//var M_total = M1.concat(M2, M3);
+
+// Vytvoření trace pro Plotly
+//name: 'Ohybový Moment',
+let trace = {
+    x: x_total,
+    y: M_total,
+    mode: 'lines',
+    name: Ra.toString() + "-" + Rb.toString() ,
+    line: { color: 'blue' }
+};
+
+// Konfigurace grafu
+let data = [trace];
+//title: 'Průběh Ohybového Momentu podél Nosníku',
+let layout = {
+    title: 'Ra=' + Ra.toString() + ' Rb=' + Rb.toString()  ,
+    xaxis: {
+        title: 'Délka nosníku [m]',
+        range: [0, Delka]
+    },
+    yaxis: {
+        title: 'Ohybový moment [Nm]'
+    },
+    showlegend: true
+};
+
+// Vykreslení grafu
+Plotly.newPlot('plot', data, layout);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Průběh Ohybového Momentu na Nosníku</title>
+    <!-- Import Plotly.js z CDN -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        #controls {
+            max-width: 800px;
+            margin: auto;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #controls label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #controls input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+        #plot {
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            margin: auto;
+        }
+        #updateButton {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        #updateButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Průběh Ohybového Momentu na Podepřeném Nosníku</h2>
+
+<!-- Kontrolní panel pro vstupní parametry -->
+<div id="controls">
+    <label>
+        Intenzita spojitého zatížení (q) [N/m]:
+        <input type="number" id="qInput" value="80917.44589226524" step="any" min="0">
+    </label>
+    <label>
+        Celková délka nosníku (Delka) [m]:
+        <input type="number" id="DelkaInput" value="20" step="any" min="0.1">
+    </label>
+    <label>
+        Vzdálenost první podpěry od levého konce (a) [m]:
+        <input type="number" id="aInput" value="2.5" step="any" min="0">
+    </label>
+    <label>
+        Vzdálenost druhé podpěry od levého konce (c) [m]:
+        <input type="number" id="cInput" value="2.5" step="any" min="0">
+    </label>
+    <button id="updateButton">Aktualizovat Graf</button>
+</div>
+
+<!-- Místo pro vykreslení grafu -->
+<div id="plot"></div>
+
+<script>
+// Funkce pro výpočet a vykreslení grafu
+function plotGraph() {
+    // Získání hodnot z inputů
+    let q = parseFloat(document.getElementById('qInput').value);       // intenzita spojitého zatížení (N/m)
+    let Delka = parseFloat(document.getElementById('DelkaInput').value); // celková délka nosníku (m)
+    let a = parseFloat(document.getElementById('aInput').value);         // vzdálenost první podpěry od levého konce (m)
+    let c = parseFloat(document.getElementById('cInput').value);         // vzdálenost druhé podpěry od levého konce (m)
+    
+    // Validace vstupů
+    if (a + c > Delka) {
+        alert("Součet vzdáleností a a c musí být menší nebo roven celkové délce nosníku.");
+        return;
+    }
+
+    // Výpočet dalších parametrů
+    let b = Delka - a - c;
+    
+    // Výpočet reakcí v podporách
+    let Rb = (q / (2 * b)) * (Math.pow((b + c), 2) - Math.pow(a, 2));
+    let Ra = q * Delka - Rb;
+    
+    // Funkce pro výpočet ohybového momentu na úsecích nosníku
+    function moment_0_a(x) {
+        return - (q * Math.pow(x, 2) / 2);
+    }
+    
+    function moment_a_b(x) {
+        return - (q / 2 * Math.pow(x, 2)) + Ra * (x - a);
+    }
+    
+    function moment_b_L(x) {
+        return - (q / 2) * Math.pow(x, 2) + Ra * (x - a) + Rb * (x - a - b);
+    }
+    
+    // Diskretizace délky nosníku
+    const numPoints = 100;
+    let x1 = Array.from({length: numPoints}, (_, i) => a > 0 ? (a > 0 ? i * a / (numPoints - 1) : 0) : 0);
+    let x2 = Array.from({length: numPoints}, (_, i) => a + i * (Delka - c - a) / (numPoints - 1));
+    let x3 = Array.from({length: numPoints}, (_, i) => Delka - c + i * c / (numPoints - 1));
+    
+    // Výpočty momentů
+    let M1 = x1.map(x => moment_0_a(x));
+    let M2 = x2.map(x => moment_a_b(x));
+    let M3 = x3.map(x => moment_b_L(x));
+    
+    // Spojení všech úseků do jednoho grafu
+    const x_total = x1.concat(x2, x3);
+    const M_total = M1.concat(M2, M3);
+    
+    // Vytvoření trace pro Plotly
+    let trace = {
+        x: x_total,
+        y: M_total,
+        mode: 'lines',
+        name: `Ra=${Ra.toFixed(2)} N, Rb=${Rb.toFixed(2)} N`,
+        line: { color: 'blue' }
+    };
+    
+    // Konfigurace grafu
+    let data = [trace];
+    let layout = {
+        title: 'Průběh Ohybového Momentu podél Nosníku',
+        xaxis: {
+            title: 'Délka nosníku [m]',
+            range: [0, Delka]
+        },
+        yaxis: {
+            title: 'Ohybový moment [Nm]'
+        },
+        showlegend: true
+    };
+    
+    // Vykreslení nebo aktualizace grafu
+    Plotly.newPlot('plot', data, layout);
+}
+
+// Inicializace grafu při načtení stránky
+document.addEventListener('DOMContentLoaded', plotGraph);
+
+// Přidání události na tlačítko "Aktualizovat Graf"
+document.getElementById('updateButton').addEventListener('click', plotGraph);
+</script>
+
+</body>
+</html>
