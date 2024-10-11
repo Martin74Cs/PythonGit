@@ -4,23 +4,28 @@ import shutil
 import sys
 
 os.system("cls")
-# print(__name__)
-# print(__file__)
-# print(__doc__)
+print("__name__")
+print(__name__)
 
-# This exports:
-# all functions from posix or nt, e.g. unlink, stat, etc.
-# os.path is either posixpath or ntpath
-# os.name is either 'posix' or 'nt'
-# os.curdir is a string representing the current directory (always '.')
-# os.pardir is a string representing the parent directory (always '..')
-# os.sep is the (or a most common) pathname separator ('/' or '\')
-# os.extsep is the extension separator (always '.')
-# os.altsep is the alternate pathname separator (None or '/')
-# os.pathsep is the component separator used in $PATH etc
-# os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
-# os.defpath is the default search path for executables
-# os.devnull is the file path of the null device ('/dev/null', etc.)
+print("__file__")
+print(__file__)
+
+print("__doc__")
+print(__doc__)
+
+# Tento export:
+# všechny funkce z posixu nebo nt, např. unlink, stat, atd.
+# os.path je buď posixpath nebo ntpath
+# os.name je buď 'posix' nebo 'nt'
+# os.curdir je řetězec představující aktuální adresář (vždy '.').
+# os.pardir je řetězec představující nadřazený adresář (vždy „..“)
+# os.sep je oddělovač (nebo nejběžnější oddělovač) názvů cest ('/' nebo '\').
+# os.extsep je oddělovač přípon (vždy '.')
+# os.altsep je oddělovač alternativních názvů cest (None nebo '/').
+# os.pathsep je oddělovač komponent používaný v $PATH atd.
+# os.linesep je oddělovač řádků v textových souborech ('\r' nebo '\n' nebo '\r\n')
+# os.defpath je výchozí vyhledávací cesta pro spustitelné soubory
+# os.devnull je cesta k souboru nulového zařízení ('/dev/null' atd.)
 
 # přejmenování souboru podle přípony souboru
 def changeFileExtension(file_path, new_extension):
@@ -71,7 +76,7 @@ if __name__ == "__main__":
     else:
         print("Soubor NE-existuje:", soubor)
 
-    # Oveření existence adresaře
+    # Oveření existence adresaře    
     if os.path.exists(cesta):
         print("Adresař existuje:", cesta)
     else:

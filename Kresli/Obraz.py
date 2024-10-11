@@ -4,6 +4,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 # import numpy as np
+# pip install PyOpenGL PyOpenGL_accelerate
 
 # Definice vrcholů a hran pro krychli
 vertices = [
@@ -56,7 +57,7 @@ def main():
 
         #glRotatef(1, 0, 1, 0)  # Rotace kolem osy Y
         #glRotatef(1, 0, 0, 1)  # Rotace kolem stredu
-        glRotatef(1, 1, 0, 0)  # Rotace dopředu
+        glRotatef(1, 1, 1, 0)  # Rotace dopředu
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         draw_cube()

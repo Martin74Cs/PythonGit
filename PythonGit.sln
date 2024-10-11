@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fyzika", "Fyzika", "{59846CBB-29DC-45B2-BA34-3A6671749C96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kyvadlo", "Kyvadlo", "{71DDDC4F-4588-4B15-B93F-3681625FAA68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csharp", "Fyzika\Kyvadlo\csharp\csharp.csproj", "{46B95EDA-2CA5-4F8D-9BA3-09BE8E7FC894}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46B95EDA-2CA5-4F8D-9BA3-09BE8E7FC894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B95EDA-2CA5-4F8D-9BA3-09BE8E7FC894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B95EDA-2CA5-4F8D-9BA3-09BE8E7FC894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B95EDA-2CA5-4F8D-9BA3-09BE8E7FC894}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{71DDDC4F-4588-4B15-B93F-3681625FAA68} = {59846CBB-29DC-45B2-BA34-3A6671749C96}
+		{46B95EDA-2CA5-4F8D-9BA3-09BE8E7FC894} = {71DDDC4F-4588-4B15-B93F-3681625FAA68}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5D1EEAC-2B31-4965-9735-9488371BD5F3}
+	EndGlobalSection
+EndGlobal

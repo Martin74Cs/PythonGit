@@ -12,22 +12,31 @@ a = "aaa"
 print("Datový typ " , type(a) , "Proměná " , a)
 
 # comlex
-a = 3j
+a = 3j+1
 print("Datový typ " , type(a) , "Proměná " , a)
+print("Komplexní násobení ", a,"*", a, "=", a * a )
+print("Komplexní Sčitání ", a, "+", a, "=",  a + a )
 
 # tuple
-# je nemeny
+# nejde změnit ani doplnit
 a = ()
 print("Datový typ " , type(a) , "Proměná " , a)
 a = ("okurka", "citron", "jahoda")
 print("Datový typ " , type(a) , "Proměná " , a)
-a = list(a)
-# lze měnit
-print("Datový typ " , type(a) , "Proměná " , a)
 
-# list
+# bude načten předchozí seznam a 
+a = list(a)
+print("Datový typ " , type(a) , "Proměná " , a)
+# nyní lze přidávat a mazat
+a.append("citron")
+print("Datový typ " , type(a) , "Proměná " , a)
+a.remove("okurka")
+print("Datový typ " , type(a) , "Proměná " , a, "Index", a.index("jahoda") )
+
+# pole
 a = []
 print("Datový typ " , type(a) , "Proměná " , a)
+
 # přidání hodnot
 a.append("Auto")
 a.append(12)
