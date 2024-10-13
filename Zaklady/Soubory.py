@@ -44,6 +44,7 @@ def changeExtension(file_path, new_extension) -> str:
 
 if __name__ == "__main__":
     cesta = os.path.realpath(__file__)
+    print("Cesta k aktuálnímu skriptu:", cesta)
     cesta = __file__
     print("Cesta k aktuálnímu skriptu:", cesta)
 
@@ -55,7 +56,6 @@ if __name__ == "__main__":
     directory = os.path.basename(cesta)
     print("Jmeno soubor:", directory)
 
-
     directory = os.path.splitext(cesta)
     print("Přípona souboru jako pole:", directory)
 
@@ -63,14 +63,28 @@ if __name__ == "__main__":
     print("Disk jako pole:", directory)
 
     # Příklad použití:
-    directory = os.path.dirname(cesta)
-    soubor = directory + "\\Soubor" + "\\txt.txt"
+    # cesta = __file__
+    directory = os.path.dirname(__file__)
+    Adresar =  os.path.join(directory, "Save")
+    # Jedná o vložení cesta do třídy 
+    # potom lze použít metody třídy s tečkovou notací
+    libAdresar = pathlib.Path(Adresar)
+    print("Cesta1: " , directory)
+    print("Cesta2: " , Adresar)
+    print("Cesta3: " , libAdresar)
+    print("Cesta4: " , pathlib.Path(os.path.dirname(Adresar)))
+    # soubor = Adresar + "\\Save" + "\\txt.txt"
+    soubor = os.path.join(Adresar, "Txt.txt")
+       
+    # Vytvoření adresáře pokud nexistuje    
+    # musí být součástí pathlib.Path
+    libAdresar.mkdir(parents=True, exist_ok=True)
 
-    # Vytvoření adresáře pokud nexistuje
-    cesta = pathlib.Path(os.path.dirname(soubor))
-    cesta.mkdir(parents=True, exist_ok=True)
+    # Vytvoření adresáře včetně rodičovských složek, pokud neexistují
+    os.makedirs(Adresar, exist_ok=True)
+    # os.mkdir()
 
-    # Oveření existence souboru
+    # Otevření existence souboru
     if not os.path.exists(soubor):
         print("Soubor existuje:", soubor)
     else:
@@ -88,7 +102,7 @@ if __name__ == "__main__":
 
     if not os.path.exists(soubor):
     # UVOLNENI ZDROJE POUŽITÍ PŘI PRÁCI SOUBORU A DATABAZI:
-        with open(soubor, mode="w", encoding="utf-8", buffering=1 , newline="/n") as fs:
+        with open(soubor, mode="w", encoding="utf-8", buffering=1 , newline="\n") as fs:
             fs.write("První řádek\n")
             fs.write("Dva řádek\n")
             fs.close()
@@ -105,7 +119,7 @@ if __name__ == "__main__":
 
     print("Cesta k souboru:", soubor)
     if os.path.exists(soubor):
-        changeFileExtension(soubor, ".csv")
+        changeFileExtension(soubor, ".txt")
         print("Úspěšně změněno!")
     else:
         print("Soubor EXISTUJE" , soubor)

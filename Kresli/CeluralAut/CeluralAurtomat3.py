@@ -4,8 +4,8 @@ import json
 import os
 
 # Nastavení
-grid_size = 50  # velikost mřížky
-cell_size = 15  # velikost buňky (pixelů)
+grid_size = 200  # velikost mřížky
+cell_size = 5  # velikost buňky (pixelů)
 width, height = grid_size * cell_size, grid_size * cell_size + 50  # Výška zvětšena kvůli menu
 black, white, gray, green, red = (0, 0, 0), (255, 255, 255), (50, 50, 50), (0, 255, 0), (255, 0, 0)
 
@@ -33,16 +33,19 @@ def draw_grid():
 def draw_buttons():
     pygame.draw.rect(screen, green, (10, 10, 100, 30))  # Tlačítko "Uložit"
     pygame.draw.rect(screen, green, (120, 10, 100, 30))  # Tlačítko "Načíst"
-    pygame.draw.rect(screen, green, (230, 10, 150, 30))  # Tlačítko "Náhodně rozmístit"
-    
+    pygame.draw.rect(screen, green, (230, 10, 180, 30))  # Tlačítko "Náhodně rozmístit"
+    pygame.draw.rect(screen, green, (420, 10, 100, 30))  # Tlačítko "Náhodně rozmístit"
+
     font = pygame.font.SysFont(None, 24)
     save_text = font.render('Uložit', True, black)
     load_text = font.render('Načíst', True, black)
     random_text = font.render('Náhodně rozmístit', True, black)
-    
+    delete = font.render('Smazat', True, black)
+
     screen.blit(save_text, (25, 15))
     screen.blit(load_text, (135, 15))
     screen.blit(random_text, (240, 15))
+    screen.blit(delete, (430, 15))
 
 # Funkce pro uložení mřížky do souboru
 def save_grid(filename="grid_save.json"):
@@ -60,12 +63,18 @@ def load_grid(filename="grid_save.json"):
 def randomize_grid():
     global grid
     # grid = np.random.choice([0, 1], size=(grid_size, grid_size))
-    ProcentaZivota=0.08
+    ProcentaZivota=0.3
     grid = np.random.choice([0, 1], size=(grid_size, grid_size), p=[1 - ProcentaZivota, ProcentaZivota])
+
+# Funkce pro mazání
+def delete_grid():
+    global grid
+    grid.fill(0)
 
 # Funkce pro aktualizaci mřížky podle pravidel Hry života
 def update_grid():
     new_grid = grid.copy()
+    # row x->i , col y=->j
     for i in range(grid_size):
         for j in range(grid_size):
             total = (grid[i, (j-1)%grid_size] + grid[i, (j+1)%grid_size] +
@@ -102,11 +111,12 @@ while running:
                 save_grid()
             elif 120 <= x <= 220 and 10 <= y <= 40:  # Načíst
                 load_grid()
-            elif 230 <= x <= 380 and 10 <= y <= 40:  # Náhodně rozmístit
+            elif 230 <= x <= 230+180 and 10 <= y <= 40:  # Náhodně rozmístit
                 randomize_grid()
             elif not simulation and y >= 50:  # Kliknutí do mřížky (pod menu)
                 grid[(y - 50) // cell_size][x // cell_size] ^= 1  # Přepnutí buňky mezi živou a mrtvou
-                
+            elif 430 <= x <= 430+100 and 10 <= y <= 40:  # Náhodně rozmístit
+                delete_grid()               
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 simulation = not simulation  # Přepínání mezi simulací a editací
@@ -115,6 +125,6 @@ while running:
         grid = update_grid()
     
     pygame.display.flip()
-    clock.tick(10)
+    # clock.tick(500)
 
 pygame.quit()

@@ -1,6 +1,7 @@
 import json
 import xmltodict
 import os
+import pathlib
 
 # pip install xmltodict
 
@@ -51,6 +52,7 @@ def SaveToJson(people : Person, filename: str):
 def SaveToXml(person: Person, filename: str):
     # person_dict = {'person': person.to_dict()}
     person_dict ={"Root": {"Person": [obj.to_dict() for obj in person]}}
+
     with open(filename, 'w') as f:
         f.write(xmltodict.unparse(person_dict, pretty=True))
 
@@ -61,6 +63,17 @@ def LoadXml(filename: str) -> Person:
         data = xmltodict.parse(xml_content)
         data = [Person.from_dict(item) for item in data["Root"]["Person"]]
     return data
+
+os.system("cls")
+
+# Příklad použití:
+cesta = __file__
+directory = os.path.dirname(cesta)
+soubor = directory + "\\Soubor" + "\\txt.txt"
+
+# Vytvoření adresáře pokud nexistuje
+cesta = pathlib.Path(os.path.dirname(soubor))
+cesta.mkdir(parents=True, exist_ok=True)
 
 # Získání aktuálního adresáře
 current_directory = os.getcwd()
