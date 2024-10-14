@@ -4,8 +4,8 @@ import json
 import os
 
 # Nastavení
-grid_size = 200  # velikost mřížky
-cell_size = 5  # velikost buňky (pixelů)
+grid_size = 100  # velikost mřížky
+cell_size = 10  # velikost buňky (pixelů)
 width, height = grid_size * cell_size, grid_size * cell_size + 50  # Výška zvětšena kvůli menu
 black, white, gray, green, red = (0, 0, 0), (255, 255, 255), (50, 50, 50), (0, 255, 0), (255, 0, 0)
 
@@ -125,6 +125,6 @@ while running:
         grid = update_grid()
     
     pygame.display.flip()
-    # clock.tick(500)
+    clock.tick(10)
 
 pygame.quit()

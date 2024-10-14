@@ -4,14 +4,19 @@ import json
 import os
 
 # Nastavení
-grid_size = 150  # velikost mřížky
-cell_size = 5  # velikost buňky (pixelů)
+grid_size = 100  # velikost mřížky
+cell_size = 10  # velikost buňky (pixelů)
 width, height = grid_size * cell_size, grid_size * cell_size + 50  # Výška zvětšena kvůli menu
 black, white, gray, green, red = (0, 0, 0), (255, 255, 255), (50, 50, 50), (0, 255, 0), (255, 0, 0)
+
 
 # Inicializace pygame
 pygame.init()
 screen = pygame.display.set_mode((width, height))
+
+# Nastavení fontu
+font = pygame.font.SysFont(None, 48)  # Velikost písma 48 bodů
+
 pygame.display.set_caption("Hra života - nastav buňky, spusť simulaci, ukládej a načítej")
 clock = pygame.time.Clock()
 
@@ -103,39 +108,81 @@ def update_grid():
                     new_grid[i, j] = 1
     return new_grid
 
-# Hlavní smyčka
-running = True
-simulation = False
-while running:
-    screen.fill(black)
-    draw_grid()
-    draw_buttons()
-    
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            x, y = pygame.mouse.get_pos()
-            
-            # Kliknutí na tlačítka
-            if 10 <= x <= 110 and 10 <= y <= 40:  # Uložit
-                save_grid()
-            elif 120 <= x <= 220 and 10 <= y <= 40:  # Načíst
-                load_grid()
-            elif 230 <= x <= 230+180 and 10 <= y <= 40:  # Náhodně rozmístit
-                randomize_grid()
-            elif not simulation and y >= 50:  # Kliknutí do mřížky (pod menu)
-                grid[(y - 50) // cell_size][x // cell_size] ^= 1  # Přepnutí buňky mezi živou a mrtvou
-            elif 430 <= x <= 430+100 and 10 <= y <= 40:  # Náhodně rozmístit
-                delete_grid()               
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                simulation = not simulation  # Přepínání mezi simulací a editací
-    
-    if simulation:
-        grid = update_grid()
-    
-    pygame.display.flip()
-    # clock.tick(500)
+# Funkce pro vykreslení textu na obrazovku
+def draw_text(text, font, color, surface, x, y):
+    text_obj = font.render(text, True, color)
+    text_rect = text_obj.get_rect(center=(x, y))
+    surface.blit(text_obj, text_rect)
 
-pygame.quit()
+# Funkce pro zobrazení úvodní obrazovky
+def showUvod():
+    screen.fill(black)  # Vyplnění pozadí černou barvou
+    
+    # Zobrazení názvu hry
+    draw_text("Hra života", font, white, screen, width // 2, height // 4)
+    draw_text("Celularní automat", font, white, screen, width // 2, height // 4 + 30)
+
+    # Zobrazení instrukcí
+    draw_text("Jak hrát:", font, white, screen, width // 2, height // 2 - 50)
+    draw_text("Levým tlačítkem myši zapneš buňky", font, white, screen, width // 2, height // 2)
+    draw_text("Mezerník pro spuštění/pauzu simulace", font, white, screen, width // 2, height // 2 + 50)
+    
+    # Zobrazení instrukce pro začátek
+    draw_text("Stiskni libovolnou klávesu pro začátek", font, white, screen, width // 2, height - 100)
+    
+    pygame.display.update()  # Aktualizace obrazovky
+    
+    # Čekání na vstup uživatele
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:  # Když uživatel stiskne klávesu
+                waiting = False  # Ukončíme čekání a začne hra
+
+# Hlavní smyčka
+def HlavniHra():
+    global grid
+    running = True
+    simulation = False
+    while running:
+        screen.fill(black)
+        # Klesli mřížka
+        draw_grid()
+        # Klesli tlačítka
+        draw_buttons()
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = pygame.mouse.get_pos()
+                
+                # Kliknutí na tlačítka
+                if 10 <= x <= 110 and 10 <= y <= 40:  # Uložit
+                    save_grid()
+                elif 120 <= x <= 220 and 10 <= y <= 40:  # Načíst
+                    load_grid()
+                elif 230 <= x <= 230+180 and 10 <= y <= 40:  # Náhodně rozmístit
+                    randomize_grid()
+                elif not simulation and y >= 50:  # Kliknutí do mřížky (pod menu)
+                    # print("Hodnoty ", (y - 50) // cell_size, x // cell_size)
+                    # print("Hodnoty grid ", grid[40][50])
+                    grid[(y - 50) // cell_size][ x // cell_size] = 1  # Přepnutí buňky mezi živou a mrtvou
+                elif 430 <= x <= 430+100 and 10 <= y <= 40:  # Náhodně rozmístit
+                    delete_grid()               
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    simulation = not simulation  # Přepínání mezi simulací a editací
+
+        if simulation:
+            grid = update_grid()
+        
+        pygame.display.flip()
+        clock.tick(10)
+    pygame.quit()
+
+if __name__ == "__main__":
+    showUvod()
+    HlavniHra()
