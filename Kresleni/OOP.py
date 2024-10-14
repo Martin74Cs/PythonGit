@@ -1,10 +1,9 @@
 # Objektově orientované programování
 print(type(5))
-print(type("david"))
+print(type("David"))
 print(type(True))
 print(type(()))
 print(type([]))
-
 
 # Atributy a metody
 class Car:
@@ -20,7 +19,7 @@ print(type(car1))
 # Atributy a metody
 class Player:
     # constructor
-    def __init__(self, name="anonym", age=10):
+    def __init__(self, name="Martin", age=49):
         self.name = name
         self.age = age
 
