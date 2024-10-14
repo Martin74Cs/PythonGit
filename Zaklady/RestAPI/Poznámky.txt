@@ -1,0 +1,22 @@
+Získání všech knih (GET /api/books)
+bash
+curl -X GET http://127.0.0.1:5000/api/books
+
+Získání konkrétní knihy podle ID (GET /api/books/<id>)
+Například pro knihu s ID 1:
+curl -X GET http://127.0.0.1:5000/api/books/1
+
+Vytvoření nové knihy (POST /api/books)
+curl -X POST http://127.0.0.1:5000/api/books \
+     -H "Content-Type: application/json" \
+     -d '{"title": "Fahrenheit 451", "author": "Ray B
+
+Aktualizace existující knihy (PUT /api/books/<id>)
+Například aktualizace knihy s ID 2:
+curl -X PUT http://127.0.0.1:5000/api/books/2 \
+     -H "Content-Type: application/json" \
+     -d '{"title": "Brave New World Revisited"}'
+
+Smazání knihy (DELETE /api/books/<id>)
+Například smazání knihy s ID 1:
+curl -X DELETE http://127.0.0.1:5000/api/books/1
