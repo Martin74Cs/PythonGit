@@ -5,7 +5,7 @@ import numpy as np
 pygame.init()
 
 # Nastavení velikosti okna
-screen_width, screen_height = 1024, 800
+screen_width, screen_height = 1240, 1024
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Mandelbrotova množina s výběrem oblasti a postupným vykreslováním")
 
