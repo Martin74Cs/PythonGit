@@ -1,4 +1,6 @@
 # pip install Flask-JWT-Extended
+# pip install Flask-limiter
+# pip install Flask-marshmallow
 
 # Použijeme knihovnu Werkzeug pro hashování hesel.
 
@@ -8,8 +10,10 @@ from flask_migrate import Migrate
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
+from marshmallow import Schema, fields, validate, ValidationError
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
 
 app = Flask(__name__)
 # Konfigurace databáze SQLite
@@ -28,8 +32,13 @@ limiter = Limiter(
 )
 CORS(app)
 
-record_schema = RecordSchema()
+# Logování
+if not app.debug:
+    handler = RotatingFileHandler('error.log', maxBytes=100000, backupCount=3)
+    handler.setLevel(logging.ERROR)
+    app.logger.addHandler(handler)
 
+# Model User
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -46,7 +55,8 @@ class User(db.Model):
             "id": self.id,
             "username": self.username
         }
-
+    
+# Model Record
 class Record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.JSON, nullable=False)
@@ -61,6 +71,26 @@ class Record(db.Model):
             "email": self.email
         }
 
+# Schéma pro validaci dat
+class RecordSchema(Schema):
+    name = fields.Str(required=True, validate=validate.Length(min=1))
+    email = fields.Email(required=True)
+    data = fields.Dict(required=True, validate=lambda x: len(x) > 0)
+
+record_schema = RecordSchema()
+
+# Dekorátor pro role-based access
+def role_required(role):
+    def decorator(f):
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            user_id = get_jwt_identity()
+            user = User.query.get(user_id)
+            if not user or user.role != role:
+                return jsonify({"error": "Forbidden"}), 403
+            return f(*args, **kwargs)
+        return decorated
+    return decorator
 
 # @app.before_first_request
 @app._got_first_request
