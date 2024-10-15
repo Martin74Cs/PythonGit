@@ -7,21 +7,24 @@ class books:
     def __init__(self, base): 
         self.baseadres = base
 
-    def adresa(selt, adresa):
+    def adresa(self, adresa):
         self.adresa = adresa
 
     def Get(self):
-        if(self.adresa or self.baseadres): return
+        # if(self.adresa is None or self.baseadres is None): return
         Adresa = f"{self.baseadres}{self.adresa}"
+        # print("Adresa " , Adresa)
         response = requests.get(Adresa)
-
+        print("response:", response)
         if response.status_code == 200:
             books = response.json()
-            print("Všechny knihy:")
-            for book in books:
-                print(f"{book['id']}: {book['title']} od {book['author']}")
+            # print("Všechny knihy:")
+            # for book in books:
+            #     print(f"{book['id']}: {book['title']} od {book['author']}")
+            return books
         else:
             print("Chyba při získávání knih:", response.status_code)
+            return []
 
     def GetId(self,id):
         Adresa = f"{self.baseadres}{self.adresa}/{id}"
@@ -31,10 +34,11 @@ class books:
         if response.status_code == 200:
             book = response.json()
             print(f"Kniha ID {id}: {book['title']} od {book['author']}")
+            return book
         else:
             print("Kniha nenalezena:", response.status_code)
 
-    def Post(self,  novy):
+    def Post(self, novy):
         response = requests.post(f'{self.baseadres}{self.adresa}', json=novy)
 
         if response.status_code == 201:
@@ -61,28 +65,32 @@ class books:
             print("Chyba při mazání knihy:", response.status_code)
 
 os.system("cls")
-book = books("http://127.0.0.1:8080")
+# book = books("http://127.0.0.1:8080")
+book = books("http://10.55.1.84:8080")
 book.adresa = "/api/books"
+print(f"{book.baseadres}{book.adresa}")
 
-print(book.baseadres)
-book.Get()
-print()
+# book.Get()
+# print()
+ 
+test = book.GetId(1)
+print(test)
 
-book.GetId(1)
-print()
+# polozka = {
+#     "title": "Fahrenheit 451",
+#     "author": "Ray Bradbury"
+# }
+# book.Post(polozka)
+# print()
+# book.Get()
+# print()
 
-polozka = {
-    "title": "Fahrenheit 451",
-    "author": "Ray Bradbury"
-}
-# book.Post("/api/books", polozka)
-print()
-book.Get()
-print()
-
-update_data = {
-    "title": "Brave New World Revisited"
-}
-book.Put(2, update_data)
-print()
-book.Get()
+# update_data = {
+#     "title": "Brave New World Revisited"
+# }
+# book.Put(2, update_data)
+print("Všechny knihy")
+test = book.Get()
+print(test)
+# for book in test:
+#     print(f"{book['id']}: {book['title']} od {book['author']}")

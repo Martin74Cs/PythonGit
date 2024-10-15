@@ -1,6 +1,7 @@
 Získání všech knih (GET /api/books)
 bash
 curl -X GET http://127.0.0.1:5000/api/books
+curl -X GET http://10.55.1.84:8080/api/books
 
 Získání konkrétní knihy podle ID (GET /api/books/<id>)
 Například pro knihu s ID 1:
