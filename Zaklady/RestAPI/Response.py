@@ -73,7 +73,6 @@ class books:
             return []
     
 def Knihy():
-
     APIbook.Adresa = "/api/books"
     print(f"{APIbook.BaseAdres}{APIbook.Adresa}")
 
@@ -113,12 +112,13 @@ def Knihy():
     for book in Sbooks:
         print(f"{book['id']}: {book['title']} od {book['author']}")
 
+
 os.system("cls")
 # Získání názvu počítače
 hostname = os.environ['COMPUTERNAME']
 print(f"Název počítače: {hostname}")
 
-APIbook = books("http://10.55.1.84:8080")
+APIbook = books("http://10.55.1.84:80")
 if(hostname == "MARTIN"):
     APIbook = books("http://192.168.1.32:8080")
 
@@ -129,14 +129,25 @@ print("Všechny data")
 print(Datas)
 print()
 
-polozka = {
-    "id": 0,
-    "title": "Fahrenheit 451",
-    "author": "Ray Bradbury"
-}
-Data = APIbook.Post(polozka)
-print("Data Add" , Data)
+# polozka = { "id": 0, "title": "Fahrenheit 451", "author": "Ray Bradbury" }
+# Data = APIbook.Post(polozka)
+# print("Data Add" , Data)
+
+# Ukázková data
+DataPrvni = [
+    {"id": 1, "title": "1984", "author": "George Orwell"},
+    {"id": 2, "title": "Brave New World", "author": "Aldous Huxley"},
+    { "id": 0, "title": "Fahrenheit 451", "author": "Ray Bradbury" },
+]
+
+for item in DataPrvni:
+    Data = APIbook.Post(item)
+
 Datas = APIbook.Get()
+
+for item in Datas:
+    Data = APIbook.Delete(item.id)
+
 print("Všechny kontrola")
 print(Datas)
 
