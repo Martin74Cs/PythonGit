@@ -16,6 +16,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 # Renderování Šablon render_template
 from data import db
+from models import Author, Book
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -28,7 +29,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # Import modelů po inicializaci db, aby se zabránilo kruhovým importům
-from models import Author, Book
+# from models import Author, Book
 
 # Vytvoření databáze a tabulky
 # @app.before_first_request
@@ -161,12 +162,17 @@ def add_book():
     db.session.commit()
     return jsonify(new_book.to_dict()), 201
 
-
 # Šablona pro zobrazení knih v HTML
 @app.route('/')
 def home():
     books = Book.query.all()
     return render_template('index.html', books=books)
+
+# Šablona pro zobrazení knih v HTML
+@app.route('/addbook')
+def addbook():
+    books = Book.query.all()
+    return render_template('addbook.html', books=books)
 
 if __name__ == '__main__':
     os.system("cls")
