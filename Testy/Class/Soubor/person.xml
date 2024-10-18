@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+	<Person>
+		<jmeno>Martin</jmeno>
+		<age>49</age>
+		<city>Ústí nad Labem</city>
+	</Person>
+	<Person>
+		<jmeno>Alena</jmeno>
+		<age>35</age>
+		<city>Ústí nad Labem</city>
+	</Person>
+</Root>

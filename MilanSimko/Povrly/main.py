@@ -48,15 +48,27 @@ class DateEncoder(json.JSONEncoder):
 	def default(self, obj):
 		return obj.__dict__
 
+BaseAdres = "U:\\Elektro\\mcsato\\Zakázky\\Povrly.med\\"
+# Získání názvu počítače
+hostname = os.environ['COMPUTERNAME']
+if(hostname == "MARTIN"):
+	StartAdresar = os.path.dirname(__file__)
+	BaseAdres = os.path.join(StartAdresar, "Soubor")
+	os.makedirs(BaseAdres, exist_ok=True)
+
+objekty = os.path.join(BaseAdres, "objekty.json")
+print(objekty)
 json_data = json.dumps([vars(obj) for obj in objs], indent=4, ensure_ascii=False, cls=DateEncoder)
-with open("U:\\Elektro\\mcsato\\Zakázky\\Povrly.med\\objekty.json", 'w', encoding='utf-8', newline='\n') as f:
+with open(objekty, 'w', encoding='utf-8', newline='\n') as f:
 	f.write(json_data)
 
+zarizeni = os.path.join(BaseAdres, "zarizeni.json") 
 json_data = json.dumps([vars(obj) for obj in itms], indent=4, ensure_ascii=False, cls=DateEncoder)
-with open("U:\\Elektro\\mcsato\\Zakázky\\Povrly.med\\zarizeni.json", 'w', encoding='utf-8', newline='\n') as f:
+with open(zarizeni, 'w', encoding='utf-8', newline='\n') as f:
 	f.write(json_data)
 
-with open("U:\\Elektro\\mcsato\\Zakázky\\Povrly.med\\zarizeni.csv", 'w', encoding='utf-8', newline='\n') as f:
+zarizeni = os.path.join(BaseAdres, "zarizeni.csv") 
+with open(zarizeni, 'w', encoding='utf-8', newline='\n') as f:
 	w = csv.DictWriter(f, fieldnames=vars(itms[0]))
 	w.writerows([vars(obj) for obj in itms])
 

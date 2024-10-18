@@ -77,7 +77,7 @@ def objByTag(_lst: list, _tag: str) -> object:
 	#_lst[_idx]
 	return _lst[[_.tag for _ in _lst].index(_tag)]
 
-def add(_lst: list, _obj: object, _id: int = -1) -> None:
+def add(_lst: list, _obj: object, _id: int = None) -> None:
 	# Rodič / ukazatel na jiný záznam není definovaný
 	for item in _lst:
 		if item.id == _obj.id:

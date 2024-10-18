@@ -82,6 +82,7 @@ if __name__ == "__main__":
 
     # Vytvoření adresáře včetně rodičovských složek, pokud neexistují
     os.makedirs(Adresar, exist_ok=True)
+    # Vytvoření jednoho adresáře
     # os.mkdir()
 
     # Otevření existence souboru

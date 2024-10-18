@@ -1,0 +1,250 @@
+[
+    {
+        "_Unit__id": 1,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 2,
+        "_Unit__sfx": null,
+        "_Unit__name": "Nová výrobní hala",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 2,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 3,
+        "_Unit__sfx": null,
+        "_Unit__name": "Potrubní mosty",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 3,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 4,
+        "_Unit__sfx": null,
+        "_Unit__name": "Rozvodna VN a NN",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 4,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 5,
+        "_Unit__sfx": null,
+        "_Unit__name": "Základy vzduchotechniky",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 5,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 6,
+        "_Unit__sfx": null,
+        "_Unit__name": "Demolice",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 6,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 8,
+        "_Unit__sfx": null,
+        "_Unit__name": "Strojovna chlazení",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 7,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 9,
+        "_Unit__sfx": null,
+        "_Unit__name": "Moření",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 8,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 10,
+        "_Unit__sfx": null,
+        "_Unit__name": "Nůžky",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 9,
+        "_Unit__pfx": "SO",
+        "_Unit__num": 11,
+        "_Unit__sfx": null,
+        "_Unit__name": "Nová úpravna vody",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 10,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 1,
+        "_Unit__sfx": null,
+        "_Unit__name": "Dešťová kanalizace",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 11,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 2,
+        "_Unit__sfx": null,
+        "_Unit__name": "Splašková kanalizace",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 12,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 3,
+        "_Unit__sfx": null,
+        "_Unit__name": "Průmyslová kanalizace",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 13,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 4,
+        "_Unit__sfx": null,
+        "_Unit__name": "Pitná voda",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 14,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 5,
+        "_Unit__sfx": null,
+        "_Unit__name": "Požární voda",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 15,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 6,
+        "_Unit__sfx": null,
+        "_Unit__name": "Komunikace",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 16,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 7,
+        "_Unit__sfx": null,
+        "_Unit__name": "Vnější silnoproudá elektrotechnika",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 17,
+        "_Unit__pfx": "IO",
+        "_Unit__num": 8,
+        "_Unit__sfx": null,
+        "_Unit__name": "Vnější slaboproudé rozvody",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 18,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 1,
+        "_Unit__sfx": null,
+        "_Unit__name": "Jeřáby nové výrobní haly",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 19,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 2,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie tavení a lití",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 20,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 3,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologická vzduchotechnika",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 21,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 4,
+        "_Unit__sfx": null,
+        "_Unit__name": "Rozvod zemního plynu",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 22,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 5,
+        "_Unit__sfx": null,
+        "_Unit__name": "Potrubní technologické rozvody vnitřní",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 23,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 6,
+        "_Unit__sfx": null,
+        "_Unit__name": "Potrubní technologické rozvody vnější",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 24,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 7,
+        "_Unit__sfx": null,
+        "_Unit__name": "Silnoproudá elektrotechnika",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 25,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 8,
+        "_Unit__sfx": null,
+        "_Unit__name": "Slaboproudé rozvody",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 26,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 9,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie válcování",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 27,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 10,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie žíhání",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 28,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 11,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie moření",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 29,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 12,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie stříhání",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 30,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 13,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie úpravy vody",
+        "_Unit__note": null
+    },
+    {
+        "_Unit__id": 31,
+        "_Unit__pfx": "PS",
+        "_Unit__num": 14,
+        "_Unit__sfx": null,
+        "_Unit__name": "Technologie chlazení",
+        "_Unit__note": null
+    }
+]
