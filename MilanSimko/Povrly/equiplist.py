@@ -77,7 +77,7 @@ def objByTag(_lst: list, _tag: str) -> object:
 	#_lst[_idx]
 	return _lst[[_.tag for _ in _lst].index(_tag)]
 
-def add(_lst: list, _obj: object, _id: int = None) -> None:
+def add(_lst: list, _obj: object, _id: int = -1) -> None:
 	# Rodič / ukazatel na jiný záznam není definovaný
 	for item in _lst:
 		if item.id == _obj.id:
@@ -102,7 +102,7 @@ def add(_lst: list, _obj: object, _id: int = None) -> None:
 				break
 			add(item.subitem, _obj, _id)
 
-def exportAsXLS(items: list, sheet: object, filterById: int = None) -> None:
+def exportAsXLS(items: list, sheet: object, filterById: int = -1) -> None:
 	rec: int = 1
 	row: int = 7  # první řádek v Excelu pro tisk dat
 	for item in items:
@@ -195,11 +195,11 @@ class Item:
 #		def unit(self, val: str): self.__unit = val
 	# end of class Param
 
-	def __init__(self, _id: int, _cunit: object, _munit: object, _tag: str, _name: str, _pcs: int, _type: str = None, PU: bool = False, note: str = None) -> None:
+	def __init__(self, _id: int, _cunit: object, _munit: object, _tag: str, _name: str, _pcs: int, _type: str = -1, PU: bool = False, note: str = None) -> None:
 		self.__id: int = _id             # unikátní identifikátor
 		self.__cunit: object = _cunit    # reference na inženýrský / stavební objekt
 		self.__munit: object = _munit    # reference na provozní soubor
-		self.__revNo: int = None         # číslo revize
+		self.__revNo: int = -1         # číslo revize
 
 		self.__tag: str = _tag           # označení
 		self.__name: str = _name         # název
@@ -207,16 +207,16 @@ class Item:
 		self.__type: str = _type         # typ
 
 		self.__fluid: list = []          # provozní tekutina
-		self.__dimensionX: float = None  # rozměr
-		self.__dimensionY: float = None  # rozměr
-		self.__dimensionZ: float = None  # rozměr
+		self.__dimensionX: float = -1    # rozměr
+		self.__dimensionY: float = -1    # rozměr
+		self.__dimensionZ: float = -1    # rozměr
 		self.__material: str = None      # materiál
-		self.__heating: bool = None      # otop
-		self.__mass: float = None        # hmotnost
+		self.__heating: bool = False      # otop
+		self.__mass: float = -1        # hmotnost
 		self.__insul: str = None         # izolace
-		self.__anchor: bool = None       # kotvení
-		self.__power: float = None       # výkon
-		self.__noise: float = None       # hluk
+		self.__anchor: bool = False       # kotvení
+		self.__power: float = -1       # výkon
+		self.__noise: float = -1       # hluk
 		self.__note: str = note          # poznámka
 		self.__PU: bool = PU             # balená jednotka
 
