@@ -72,5 +72,12 @@ with open(zarizeni, 'w', encoding='utf-8', newline='\n') as f:
 	w = csv.DictWriter(f, fieldnames=vars(itms[0]))
 	w.writerows([vars(obj) for obj in itms])
 
+sys.path.append(os.path.abspath(r'C:\VSCode\PythonGit\Testy\Class\SaveLoad2'))
+
+import SaveLoad2 as file
+
+zarizeni2 = os.path.join(BaseAdres, "zarizeni2.csv") 
+file.SaveToCsv2(itms, zarizeni2)
+
 sys.exit(0)
 # vim:tw=10000:ts=4:sts=4:sw=4:noexpandtab:
