@@ -490,11 +490,14 @@ class Item:
 				cell.value = self.tag
 				if level < 1:
 					cell.api.Font.Bold = True
+
 				cell = sheet.range(f'J{row}')                                # kusů
 				cell.value = self.pcs
 				cell.api.HorizontalAlignment = xw.constants.HAlign.xlHAlignCenter
+
 				cell = sheet.range(f'K{row}')                                # název zařízení
 				cell.value = "  "*level + self.name.upper()
+
 				if level < 1:
 					cell.api.Font.Bold = True
 				if level > 0:
@@ -504,8 +507,10 @@ class Item:
 #					subcells.api.Borders(8).Weight = 1     # xlThick
 					subcells.api.Borders(9).LineStyle = 1  # xlContinuous
 					subcells.api.Borders(9).Weight = 1     # xlThick
+
 				cell = sheet.range(f'L{row}')                                # typ
 				cell.value = self.type
+				
 				cell = sheet.range(f'M{row}')                                # technický parametr
 				cell.value = '—'
 				cell.api.HorizontalAlignment = xw.constants.HAlign.xlHAlignRight
