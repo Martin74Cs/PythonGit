@@ -36,7 +36,7 @@ print("\nSeznam videí na kanálu: " + urlchannel)
 print(f"Jméno kanálu: {channel.channel_name}")
 for video in channel.videos:
     try:
-        print(f"- {video.title} ({video.views} zobrazení)")
+        print(f"Kanály - {video.title} ({video.views} zobrazení)")
     except:
         pass
 
@@ -46,6 +46,7 @@ seznam = "https://www.youtube.com/playlist?list=PLjQgcUrQ52qkpXtCJvI7-GmPGS4gYuX
 seznam = "https://www.youtube.com/playlist?list=PL35IqLRAUZkxery2dpVsZSwiVTnKr-QBg"
 seznam = "https://www.youtube.com/playlist?list=PLNyzSjIOf2h6z-Ock6uV2QHyr9CXJGRge"
 
+print("------------------------------------")
 print("\nSeznam videí na playlist: " + seznam)
 c = pytube.Playlist(seznam)
 for url in c.video_urls:
@@ -54,13 +55,14 @@ for url in c.video_urls:
     # Tube.download(Downloads)
     break
 
+print("------------------------------------")
 print("\nPokus o seznam")
 # print(c.title)
 for video in c.videos: # .video_urls:
 #      print(v.channel_url)
     # print(video)
-    print(video.title)
-    print(video.author) 
+    # print(video.title)
+    # print(video.author) 
     # vv = video.streams.first()
     # Tube = pytube.YouTube(v)
     # v.streams.first().download()
@@ -82,9 +84,10 @@ seznam = "huge fat ass"
 seznam = "Petr kulhanek"
 seznam = "pes baskervillský"
 
+print("------------------------------------")
 c = pytube.Search(seznam)
 print(len(c.results))
-print("\nSeznam " + seznam)
+print("\nSeznam  - " + seznam)
 for v in c.results:
     print(v.title)
 
@@ -102,12 +105,16 @@ for j in Pole:
 # seznam = "https://www.youtube.com/@TotallyFashion"
 seznam = "TotallyFashion"
 seznam = "Petr kulhanek"
+seznam = "pes baskervillský"
 c = pytube.Search(seznam)
-print("\n"+ seznam)
-print(len(c.results))
-p = c.results
 
-print(p[1].title)
+print("Hledaný záznan - "+ seznam)
+print(len(c.results))
+for j in c.results:
+    print(j.title)
+    print(j.author)
+    print(j.keywords)
+    print("------------------------------------")
 
 # Tube = pytube.YouTube(p[1].url)
 #  stream = Tube.streams.get_highest_resolution()
@@ -118,23 +125,31 @@ print(p[1].title)
 # url = "https://www.youtube.com/@knihydobrovskycz"
 # url = "https://www.youtube.com/watch?v=v0-yVAdtd-0&ab_channel=KnihyDobrovsk%C3%BD"
 url = "https://www.youtube.com/watch?v=zmjNBIGeKQw"
+# url = "https://www.youtube.com/watch?v=wjpSxDSFHqs"
 
 print("\nPokus o stahování")
 Tube = pytube.YouTube(url)
-print(Tube.title)
-print(Tube.author)
-print(Tube.keywords)
-print(Tube.length)
+print(Tube.captions)
+# xxx = Tube.streams.filter(only_audio=True)
+xxx = Tube.streams
+for s in xxx:
+    print(s)
+# print(Tube.title)
+# print(Tube.author)
+# print(Tube.keywords)
+# print(Tube.length) pravděpodobně není uvedeno
 
 # stream = pytube.Playlist(url)
 # print(stream)
 
 # stream = Tube.streams.get_audio_only()
+# print(stream)
 # stream.download(Downloads)
-print("\nCreate stream")
-# stream = Tube.streams
+
+stream = Tube.streams.get_audio_only()
+stream.download()  # video se stáhne do aktuálního adresáře
 # for s in stream:
-#     print(s)
+    #  print(s)
 
 print("\nCreate stream")
 # stream.get_highest_resolution().download(Downloads)
