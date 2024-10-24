@@ -2,72 +2,79 @@ import os
 
 class A:
     def __init__(self): 
-        self.__jedna = None
+        self._jedna = None
 
     # getter method 
     @property
     def jedna(self): 
-        return self.__jedna
+        return self._jedna
     
     # setter method 
     @jedna.setter 
     def jedna(self, x): 
-        self.__jedna = x 
+        self._jedna = x 
 
 class Trida:
     def __init__(self): 
-        self._age = None
-        self.__name = None
-        self.__qwe = A()
+        self.__age = None
+        self._name = None
+        self._tridaA = A()
+
 
     # getter method 
     @property
-    def qwe(self): 
-        return self.__qwe
+    def tridaA(self): 
+        return self._tridaA
     
     # setter method 
-    @qwe.setter 
+    @tridaA.setter 
     def age(self, x): 
-        self.__qwe = x 
+        self._tridaA = x 
+
+
 
     # getter method 
     @property
     def age(self): 
-        return self._age
+        return self.__age
     
     # setter method 
     @age.setter 
     def age(self, x): 
-        self._age = x 
+        self.__age = x 
+
+
+
 
     # getter method 
     @property
     def name(self): 
-        return self.__name
+        return self._name
     
     # setter method 
     @name.setter 
     def name(self, x): 
-        self.__name = x 
+        self._name = x 
 
     @name.deleter
     def name(self):
-        print("deleter of name called" , self.__name)
-        del self.__name
+        print("deleter of name called" , self._name)
+        del self._name
+
 
     # getter method 
     @property
     def nameAge(self): 
         # print(type(self.__name))
         # POZOR HODNOTA NONE NELZE VYPSAT
-        return str(self.__name) + " " + str(self._age)
+        return str(self._name) + " " + str(self.__age)
         #return self._age
 
 os.system("cls")
 
 Test = Trida()
 # Test.age = 10
-print(Test._age)        # zapozdření nefunguje
+# print(Test.__age)        # zapozdření nefunguje
 print(Test.age)
 # print(Test.__name)    Jedná se zapoudření
 # print(Test._name)     Nefunguje
@@ -76,10 +83,17 @@ print(Test.age)
 Test.jatro = "je to celé na játro"
 print(Test.jatro)
 
-# asd =  A
 A.jedna = 123
-Test.gwe = "asdf"
-print(Test.qwe.jedna)
+print(A.jedna)
+
+Test.__age = "Pokus"
+print("3-",Test.__age)
+print("4-",Test.age)
+
+Test.age = "Další"
+print("1-", Test.__age)
+print("2-", Test.age)
+
 
 Test = Trida()
 Test.age = 10

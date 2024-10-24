@@ -63,6 +63,8 @@ def serialize(obj):
             nested_data = serialize(value)
             for nested_attr, nested_value in nested_data.items():
                 serialized_data[f"{attr}.{nested_attr}"] = nested_value
+                #  serialized_data[attr] = nested_value
+            # serialized_data[attr] = [serialize(item) if hasattr(item, '__dict__') else item for item in nested_data]
         else:
             serialized_data[attr] = value
     return serialized_data
@@ -121,7 +123,8 @@ if __name__ == "__main__":
     personXml = LoadXml(Person, filename)
     print("personXml")
     print(personXml)
-
+    
+    
     filename =os.path.join(Adresar , 'person.csv')
     SaveToCsv2(Lide, filename)
 

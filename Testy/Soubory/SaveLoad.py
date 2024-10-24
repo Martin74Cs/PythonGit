@@ -128,7 +128,7 @@ os.system("cls")
 # Příklad použití:
 cesta = __file__
 directory = os.path.dirname(cesta)
-soubor = directory + "\\Soubor" + "\\txt.txt"
+soubor = directory + "\\Podpora" + "\\txt.txt"
 
 # Vytvoření adresáře pokud nexistuje
 cesta = pathlib.Path(os.path.dirname(soubor))

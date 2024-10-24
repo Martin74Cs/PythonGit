@@ -11,8 +11,8 @@ Downloads = cesta + "\\Downloads"
 
 if not os.path.exists(Downloads):
     os.mkdir(Downloads)
-
 print(Downloads)
+
 # url = imput("url")
 # print(argv)
 # url = argv[1]
@@ -80,6 +80,7 @@ seznam = "knihydobrovskycz"
 seznam = "TotallyFashion"
 seznam = "huge fat ass"
 seznam = "Petr kulhanek"
+seznam = "pes baskervillský"
 
 c = pytube.Search(seznam)
 print(len(c.results))

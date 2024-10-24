@@ -1,0 +1,25 @@
+
+class B:
+    #  Python aplikuje name mangling
+    def __init__(self):
+        self._jaro = "Test"  # Dvojité podtržítko zajišťuje soukromí atributu
+
+    @property
+    def jedna(self):
+        return self._jaro
+
+    @jedna.setter
+    def jedna(self, x):
+        self._jaro = x
+
+# Použití
+b = B()
+print(b.jedna)      # Vrátí "Test"
+b.jedna = "Nová hodnota"
+print(b.jedna)      # Vrátí "Nová hodnota"
+
+print(b._jaro)      
+
+# Přímý přístup k b.__jedna už nebude možný:
+# print(b.__jedna)  # Vyvolá chybu AttributeError
+

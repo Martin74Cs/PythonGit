@@ -11,9 +11,13 @@ pygame.display.set_caption("Mandelbrotova množina s výběrem oblasti a postupn
 
 # Barvy
 black = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 
 # Výchozí parametry Mandelbrotovy množiny
 max_iter = 256
+# max_iter = 32
 zoom = 1.0  # Počáteční zoom
 offset_x = -0.5
 offset_y = 0.0
@@ -45,17 +49,23 @@ def draw_mandelbrot_stepwise(xmin, xmax, ymin, ymax, width, height, max_iter):
         for y in range(height):
             c = complex(real_range[x], imag_range[y])
             draw_point(x, y, c, max_iter)
-
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                return
         pygame.display.update()  # Aktualizuje obrazovku po každém řádku
 
 # Hlavní smyčka hry
 running = True
 selecting = False
 start_x = start_y = 0
+rect = pygame.Rect(0, 0, 0, 0)
+
 pygame.display.update()
+
 
 screen.fill(black)
 # Vykreslení Mandelbrotovy množiny postupně
+print(-2.5, 2.5, -2.5, 2.5 , screen_width, screen_height, max_iter, offset_x,offset_y,zoom )
 draw_mandelbrot_stepwise(-2.5, 2.5, -2.5, 2.5 , screen_width, screen_height, max_iter)
 while running:
     # screen.fill(black) 
@@ -65,12 +75,16 @@ while running:
     xmax = offset_x + 2.0 / zoom
     ymin = offset_y - 1.5 / zoom
     ymax = offset_y + 1.5 / zoom
+
     # draw_mandelbrot_stepwise(xmin, xmax, ymin, ymax, screen_width, screen_height, max_iter)
 
     # Zpracování událostí
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        # Získání pozice myši
+        mouse_pos = pygame.mouse.get_pos()
 
         # Výběr oblasti pomocí myši
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -94,8 +108,20 @@ while running:
                 offset_x = (start_real + end_real) / 2
                 offset_y = (start_imag + end_imag) / 2
                 zoom *= screen_width / abs(end_x - start_x)
-                print(xmin, xmax, ymin, ymax, screen_width, screen_height, max_iter)
+                print(xmin, xmax, ymin, ymax, screen_width, screen_height, max_iter, offset_x,offset_y,zoom )
                 draw_mandelbrot_stepwise(xmin, xmax, ymin, ymax, screen_width, screen_height, max_iter)
+
+    # Pokud je výběr aktivní, aktualizuj obdélník podle pozice myši
+    if selecting:
+        print(mouse_pos[0], mouse_pos[1])
+        current_x, current_y = mouse_pos
+        width = current_x - start_x
+        height = current_y - start_y
+        rect = pygame.Rect(start_x, start_y, width, height)
+
+    # Vykresli obdélník výběru
+    if rect.width != 0 and rect.height != 0:
+        pygame.draw.rect(screen, BLUE, rect, 2)  # Obrys obdélníku
 
     pygame.display.update()
 

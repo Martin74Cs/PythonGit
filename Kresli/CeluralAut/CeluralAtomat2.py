@@ -29,6 +29,7 @@ def draw_grid():
 
 # Funkce pro aktualizaci mřížky podle pravidel Hry života
 def update_grid():
+    # kopie pole
     new_grid = grid.copy()
     for i in range(grid_size):
         for j in range(grid_size):
