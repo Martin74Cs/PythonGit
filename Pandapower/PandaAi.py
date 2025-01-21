@@ -19,7 +19,7 @@ trafo = pp.create_transformer_from_parameters(
     hv_bus=uzek1,
     lv_bus=uzek2,
     name="Transformátor_1",
-    sn_mva=0.4,          # Jmenovité výkon transformátoru
+    sn_mva=0.4,          # Jmenovitý výkon transformátoru
     vn_hv_kv=22.0,       # Vysokonapěťový napětí
     vn_lv_kv=0.4,        # Nízkonapěťový napětí
     vk_percent=5.0,      # Kurzový odpor [%]
@@ -71,10 +71,10 @@ line = pp.create_line(
 # Přidání zátěže na zátěžní uzel
 pp.create_load(
     net, 
-    bus=uzek3, # Uzlu, ke kterému je připojena zátěž.
-    p_mw=0.1,      # Aktivní výkon zátěže (MW).
-    q_mvar=0.05,   # Reaktivní výkon zátěže (MVAR).
-    name="Zátěž_1" # Název zátěže.
+    bus=uzek3,      # Uzlu, ke kterému je připojena zátěž.
+    p_mw=0.1,       # Aktivní výkon zátěže (MW).
+    q_mvar=0.05,    # Reaktivní výkon zátěže (MVAR).
+    name="Zátěž_1"  # Název zátěže.
 )
 
 # Spuštění výpočtu toků výkonu
@@ -83,12 +83,12 @@ pp.runpp(net)
 # Výsledky
 print("Napětí na uzlech (pu):")
 print(net.res_bus.vm_pu)
+
 print("\nZatížení vedení (%):")
 print(net.res_line.loading_percent)
+
 print("\nVýsledek transformátoru:")
 print(net.res_trafo)
-
-
 
 # Vizualizace Sítě: Můžeš použít pandapower.plotting pro vizualizaci sítě a výsledků.
 import pandapower.plotting as plot

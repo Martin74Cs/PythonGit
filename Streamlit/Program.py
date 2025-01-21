@@ -3,24 +3,27 @@ import streamlit as st
 # Title
 st.title("Hello GeeksForGeeks !!!")
 
+# Posuvník 
 number = st.slider("Pick a number", 0, 100)
 
+# Vyber ze zadaných možností
 genre = st.radio(
     "What's your favorite movie genre",
     [":rainbow[Comedy]", "***Drama***", "Documentary :movie_camera:"],
     captions = ["Laugh out loud.", "Get the popcorn.", "Never stop learning."])
 
+# Změna zobrazneí dle předchozího vyběru 
 if genre == ":rainbow[Comedy]":
     st.write("You selected comedy.")
 else:
     st.write("You didn't select comedy.")
+
 
 genre = st.radio(
     "What's your favorite movie genre",
     [":rainbow[Comedy]", "***Drama***", "Documentary :movie_camera:"],
     index=None,
 )
-
 st.write("You selected:", genre)
 
 option = st.selectbox(
@@ -64,6 +67,9 @@ if on:
 # Spuštěšní aplikace streamlit
 # streamlit run c:/VisualStudio/Python/Streamlit/Program.py 
 
+# Spuštěšní aplikace streamlit z aktuální složky
+# streamlit run Program.py 
+
 # Ceta kde je progrma
 # c:\Users\HHH594\AppData\Roaming\Python\Python39\Scripts\
 
@@ -71,6 +77,7 @@ if on:
 # c:\Users\HHH594\AppData\Roaming\Python\Python39\Scripts\streamlit run c:/VisualStudio/Python/Streamlit/Program.py 
 # c:\Users\HHH594\AppData\Roaming\Python\Python39\Scripts\streamlit run c:/VisualStudio/Python/Streamlit/Program.py --server.port 80
 # c:\Users\HHH594\AppData\Roaming\Python\Python39\Scripts\streamlit run c:/VisualStudio/Python/Streamlit/Program.py --server.port 80
+
 # KONEC WEBU
 # CTRL + C
 

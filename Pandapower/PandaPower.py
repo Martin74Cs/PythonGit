@@ -32,9 +32,9 @@ trafo = pp.create_transformer_from_parameters(
 # Definice vlastního typu kabelu jako slovník
 vlastni_typ_kabelu = {
     "c_nf_per_km": 10,       # Kapacitní reaktance [nF/km]
-    "max_i_ka": 0.25,         # Maximální proud [kA]
+    "max_i_ka": 0.25,        # Maximální proud [kA]
     "r_ohm_per_km": 0.2,     # Odpor [Ohm/km]
-    "x_ohm_per_km": 0.02,     # Reaktance [Ohm/km]
+    "x_ohm_per_km": 0.02,    # Reaktance [Ohm/km]
     "df": 1.0,               # Distribuční faktor
     "type": "line"           # Typ komponenty
 }
@@ -83,15 +83,18 @@ pp.runpp(net)
 # Výsledky
 print("Napětí na uzlech (pu):")
 print(net.res_bus.vm_pu)
+
 print("\nZatížení vedení (%):")
 print(net.res_line.loading_percent)
+
 print("\nVýsledek transformátoru:")
 print(net.res_trafo)
 
 import pandapower.plotting as plot
 plot.create_trafo_collection(net)
 
-plot.draw_collections()
+# Nefunguje
+# plot.draw_collections()
 
 # Vizualizace Sítě: Můžeš použít pandapower.plotting pro vizualizaci sítě a výsledků.
-# plot.simple_plot(net)
+plot.simple_plot(net)

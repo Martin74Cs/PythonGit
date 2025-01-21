@@ -5,7 +5,7 @@ import os
 
 # Nastavení
 grid_size = 50  # velikost mřížky
-cell_size = 10  # velikost buňky (pixelů)
+cell_size = 20  # velikost buňky (pixelů)
 width, height = grid_size * cell_size, grid_size * cell_size + 50  # Výška zvětšena kvůli menu
 black, white, gray, green, red = (0, 0, 0), (255, 255, 255), (50, 50, 50), (0, 255, 0), (255, 0, 0)
 
@@ -68,11 +68,11 @@ def load_grid(filename="grid_save.json"):
 def randomize_grid():
     global grid
     # grid = np.random.choice([0, 1], size=(grid_size, grid_size))
-    ProcentaZivota=0.7
+    ProcentaZivota=0.5
     # grid = np.random.choice([0, 1], size=(grid_size, grid_size), p=[1 - ProcentaZivota, ProcentaZivota])
 
     grid = np.zeros((grid_size, grid_size), dtype=int)  # Inicializace mřížky s mrtvými buňkami (0)
-    fill_size = 10  # Velikost centrální vyplněné oblasti
+    fill_size = cell_size  # Velikost centrální vyplněné oblasti
     start = (grid_size - fill_size) // 2  # Výpočet začátku centrální oblasti
     end = start + fill_size  # Výpočet konce centrální oblasti
 
@@ -180,7 +180,7 @@ def HlavniHra():
             grid = update_grid()
         
         pygame.display.flip()
-        clock.tick(10)
+        clock.tick(25)
     pygame.quit()
 
 if __name__ == "__main__":
