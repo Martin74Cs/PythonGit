@@ -52,18 +52,20 @@ class Kategorie(Entity):
         self.popis = str(obj.get("popis"))
         self.cislo = int(obj.get("cislo"))
 
-
-@dataclass
+ 
 class Elektro(Entity):
-
+    # Definice proměných třídy
     def  __init__(self) -> 'Elektro':
         self.name = ""
         self.popis = ""
         self.elektroElements = []   
         self.druhElektroId = 0
         self.druhElektroApid = ""
+        self.id = 0
+        self.apid ="xxxx"
         # self.druhElektro = DruhElektro(obj.get("druhElektro"))
 
+    # Naplnění třídy hosnotami
     def  json(obj) -> 'Elektro':
         if obj.get("name") is not None: Elektro.name  = str(obj.get("name"))
         if obj.get("popis") is not None: Elektro.popis = str(obj.get("popis"))
@@ -71,7 +73,9 @@ class Elektro(Entity):
         if obj.get("druhElektroId") is not None: Elektro.druhElektroId = int(obj.get("druhElektroId")) 
         if obj.get("druhElektroApid") is not None: Elektro.druhElektroApid = str(obj.get("druhElektroApid"))
         if obj.get("druhElektro") is not None: Elektro.druhElektro = DruhElektro(obj.get("druhElektro"))
-
+        if obj.get("id") is not None: Elektro.id = obj.get("id")
+        if obj.get("apid") is not None: Elektro.apid = obj.get("apid")
+        return Elektro
     # def  __init__(self,obj) -> 'Elektro':
     #     self.name = str(obj.get("name"))
     #     self.popis = str(obj.get("popis"))

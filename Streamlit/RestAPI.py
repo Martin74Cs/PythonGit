@@ -5,7 +5,7 @@ import json
 # ADRESA DEL POUŽITÍ
 API_URL = "http://localhost/api/elektro"
 # API_URL = "http://localhost/api/kabely"
-API_URL = "https://localhost:7139/API/ELEKTRO"
+# API_URL = "https://localhost:7139/API/ELEKTRO"
 
 st.title("REST API ve Streamlit")
 st.write(f"**API_URL:** {API_URL}")

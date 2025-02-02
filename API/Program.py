@@ -7,6 +7,7 @@ if __name__ == "__main__":
 
     # Definice adresy API
     adresa = "http://10.55.1.100/api/elektro"
+    adresa = "http://localhost//api/elektro"
 
     # Volání API a uložení odpovědi
     response = API(adresa)
