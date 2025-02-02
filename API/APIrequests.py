@@ -24,8 +24,10 @@ def apiAll(url):
     Out = response.json()
     print("response jako slovnik " ,Out)
     Pole = []
+
     for prvek in Out:
-        trida = Tridy.Elektro.json(prvek)
+        # trida = Tridy.Elektro.jsonToObject(prvek)
+        trida = Tridy.Elektro(**prvek)
         Pole.append(trida)
     return Pole
 
@@ -47,7 +49,7 @@ def apiPost(url, data):
 
     return trida
 
-def apiIDelete(url, id):
+def apiDelete(url, id):
     print("začala metoda delete")
     # url = 'https://example.com/resource'
     # headers = {'ID': '123'}
@@ -61,8 +63,9 @@ def apiIDelete(url, id):
     # response = requests.delete(urlLink.format(id = id))
     if response.status_code != 200:
         print("Chyba ", response)
-        exit()
-    print("záznam byl smazán ", response)
+        # exit()
+    else:
+        print("záznam byl smazán ", response)
     return 
 
 def apiPut(url, data):
@@ -84,6 +87,7 @@ if __name__ == "__main__":
     # Funguje server musí být spuštěn
     # apiUrl = "http://10.55.1.100/api/elektro"
     apiUrl = "http://localhost/api/elektro"
+    apiUrl = "http://localhost/api/Elektro/Relations"
     print(apiUrl)
     
     # Všechny záznamy vratí seznam tříd Elektro
@@ -99,13 +103,14 @@ if __name__ == "__main__":
     if restultAll:
         lastData = restultAll[-1]
         print("Poslední zaznam: " , lastData.apid)
-        data = apiIDelete(apiUrl, lastData.apid)  
+        data = apiDelete(apiUrl, lastData.apid)  
         print("Toto je smazanáý záznam", data)
 
     # Save to a file
     print()
     print("Save sample.json ")
     
+    restultAll = apiAll(apiUrl)
     data = json.dumps(restultAll, cls=ElekroEncoder, indent=4)
     print(data)
 

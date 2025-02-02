@@ -23,7 +23,16 @@ class DruhElektro(Entity):
 @dataclass
 class ElektroElement(Entity):
 
-    def  __init__(self, obj) -> 'ElektroElement':
+    def  __init__(self, id,apid, name, popis, element, elementId, elementApid) -> 'ElektroElement':
+        self.id = id
+        self.apid = apid
+        self.name = name
+        self.popis = popis
+        self.elementId = elementId
+        self.elementApid = elementApid
+        self.element =  [Element(**a) for a in element]
+
+    def  json(obj) -> 'ElektroElement':     
         self.name = str(obj.get("name"))
         self.popis = str(obj.get("popis"))
         if obj.get("elektroId") is not None: self.elektroId = int(obj.get("elektroId"))
@@ -35,8 +44,17 @@ class ElektroElement(Entity):
 
 @dataclass
 class Element(Entity):
+    def  __init__(self, id,apid, name, popis, kategorie, kategorieId, kategorieApid, svorkys) -> 'Element':
+        self.id = id
+        self.apid = apid
+        self.name = name
+        self.popis = popis
+        self.kategorieId = kategorieId
+        self.kategorieApid = kategorieApid
+        self.kategorie =  [Kategorie(**a) for a in kategorie]
+        self.svorkys =  [Svorky(**a) for a in svorkys]
 
-    def  __init__(self, obj) -> 'Element':
+    def  json(self, obj) -> 'Element':
         self.name = str(obj.get("name"))
         self.popis = str(obj.get("popis"))
         self.kategorieId = int(obj.get("kategorieId"))
@@ -47,7 +65,12 @@ class Element(Entity):
 @dataclass
 class Kategorie(Entity):
 
-    def __init__(self,obj: Any) -> 'Kategorie':
+    def json(self,name,popis,cislo) -> 'Kategorie':
+        self.name = name
+        self.popis = popis
+        self.cislo = cislo
+
+    def json(self,obj: Any) -> 'Kategorie':
         self.name = str(obj.get("name"))
         self.popis = str(obj.get("popis"))
         self.cislo = int(obj.get("cislo"))
@@ -55,14 +78,22 @@ class Kategorie(Entity):
  
 class Elektro(Entity):
     # Definice proměných třídy
-    def  __init__(self) -> 'Elektro':
-        self.name = ""
-        self.popis = ""
-        self.elektroElements = []   
-        self.druhElektroId = 0
-        self.druhElektroApid = ""
-        self.id = 0
-        self.apid ="xxxx"
+    def  __init__(self,name, popis, druhElektro, elektroElements, druhElektroId, druhElektroApid, id, apid, zarizeniId,zarizeniApid, zarizeni) -> 'Elektro':
+        self.name = name
+        self.popis = popis
+        self.elektroElements = [ElektroElement(**a) for a in elektroElements]
+        self.druhElektroId = druhElektroId
+        self.druhElektroApid = druhElektroApid
+        self.id = id
+        self.apid = apid
+        self.zarizeniId = zarizeniId
+        self.zarizeniApid = zarizeniApid
+        self.zarizeni = zarizeni
+        self.druhElektro = druhElektro
+        # self.druhElektro = DruhElektro(obj.get("druhElektro"))
+
+    def  __repr__(self):
+        return "Elektro" + self.name + self.popis + self.elektroElements + self.druhElektroId + self.druhElektroApid + self.id + self.apid + self.zarizeniId + self.zarizeniApid + self.zarizeni + self.druhElektro
         # self.druhElektro = DruhElektro(obj.get("druhElektro"))
 
     # Naplnění třídy hosnotami
@@ -74,8 +105,20 @@ class Elektro(Entity):
         if obj.get("druhElektroApid") is not None: Elektro.druhElektroApid = str(obj.get("druhElektroApid"))
         if obj.get("druhElektro") is not None: Elektro.druhElektro = DruhElektro(obj.get("druhElektro"))
         if obj.get("id") is not None: Elektro.id = obj.get("id")
+
         if obj.get("apid") is not None: Elektro.apid = obj.get("apid")
         return Elektro
+    
+    # Funkce pro deserializaci JSON na objekt
+    def jsonToObject(data) -> 'Elektro':
+        elektroElement = data.pop("elektroElements")
+        elektroElements = ElektroElement(**elektroElement) 
+        zarizeni = data.pop("zarizeni")
+        druhElektro = data.pop("druhElektro")
+        # adresa_data = data.pop("adresa")  # Vyjmeme podobjekt
+        # adresa = Adresa(**adresa_data)  # Vytvoříme instanci Adresa
+        return Elektro(elektroElements=elektroElements, zarizeni=zarizeni, druhElektro = druhElektro,  **data)  # Vytvoříme instanci Osoba
+
     # def  __init__(self,obj) -> 'Elektro':
     #     self.name = str(obj.get("name"))
     #     self.popis = str(obj.get("popis"))
@@ -87,12 +130,12 @@ class Elektro(Entity):
 @dataclass
 class Svorky(Entity):
 
-    def  __init__(self,obj) -> 'Svorky':
+    def  __init__(self,obj: Any) -> 'Svorky':
         self.name = str(obj.get("name"))
         self.popis = str(obj.get("popis"))
         self.elementId = int(obj.get("elementId"))
         self.elementApid = str(obj.get("elementApid"))
-        self.element = str(obj.get("element"))
+        # self.element = str(obj.get("element"))
 
 # Example Usage
 # jsonstring = json.loads(myjsonstring)
@@ -107,8 +150,8 @@ if __name__ == "__main__":
     print(asd['elektroElements'][1])
     print(asd['elektroElements'][0]['name'])
 
-    pokus = Elektro()
-    print("name ", pokus.name)
+    # pokus = Elektro()
+    # print("name ", pokus.name)
     # print(json.dumps(pokus, indent=4 )) 
 
     Pokus = Elektro.json(asd)
