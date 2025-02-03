@@ -124,8 +124,12 @@ for j in c.results:
 
 # url = "https://www.youtube.com/@knihydobrovskycz"
 # url = "https://www.youtube.com/watch?v=v0-yVAdtd-0&ab_channel=KnihyDobrovsk%C3%BD"
+<<<<<<< HEAD
 url = "https://www.youtube.com/watch?v=zmjNBIGeKQw"
 # url = "https://www.youtube.com/watch?v=wjpSxDSFHqs"
+=======
+url = "http://www.youtube.com/live/rriw4esRvYw"
+>>>>>>> 59dfc16 (Prace2025.02.03)
 
 print("\nPokus o stahování")
 Tube = pytube.YouTube(url)
