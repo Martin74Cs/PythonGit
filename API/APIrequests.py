@@ -88,6 +88,7 @@ if __name__ == "__main__":
     # apiUrl = "http://10.55.1.100/api/elektro"
     apiUrl = "http://localhost/api/elektro"
     apiUrl = "http://localhost/api/Elektro/Relations"
+    apiUrl = "http://10.55.1.84/api/elektro/Relations"
     print(apiUrl)
     
     # Všechny záznamy vratí seznam tříd Elektro
