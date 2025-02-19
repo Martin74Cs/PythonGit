@@ -49,21 +49,25 @@ class Elektro(Entity):
     #     self.Hmotnost = x
 
     def __str__(self):
-        return f"Elektro(ID={self.get('id')}, Name={self.get('name')}, Hmotnost={self.get('hmotnost')})"
-    
+        # return f"Elektro(ID={self.get('Id')}, Name={self.get('Name')}, Hmotnost={self.get('Hmotnost')})"
+        return f"Elektro(ID={self.Id}, Name={self.Name}, Hmotnost={self.Hmotnost})"
 class Stroj(Entity):
 
     def __init__(self, id=None, name=None, velikost=None):
         super().__init__(id, name)  # Initialize Entity attributes
         self.Velikost = velikost
 
-    @property
-    def Velikost(self):
-        return self.Velikost
+    # @property
+    # def Velikost(self):
+    #     return self.Velikost
 
-    @Velikost.setter
-    def Velikost(self, x):
-        self.Velikost = x
+    # @Velikost.setter
+    # def Velikost(self, x):
+    #     self.Velikost = x
+
+    def __str__(self):
+        # return f"Elektro(ID={self.get('Id')}, Name={self.get('Name')}, Hmotnost={self.get('Hmotnost')})"
+        return f"Stroj(ID={self.Id}, Name={self.Name}, Velikost={self.Velikost})"
 
 def Select(entity: enumerate[Entity], find: int) -> Entity | None:
     pole = []
@@ -76,7 +80,7 @@ def Select(entity: enumerate[Entity], find: int) -> Entity | None:
 def SelectPodmínka(entity: enumerate[Entity], Podmínka) -> enumerate[Entity] | None:
     pole = []
     for znak in entity:
-        if(Podmínka):
+        if(Podmínka(znak)):
             pole.append(znak)
     return pole
 
@@ -92,7 +96,7 @@ Pole.append(Elektro(2,"Dva",200))
 Pole.append(Elektro(3,"Tři",300))
 Vyber = Select(Pole, 3)
 print(Vyber.Hmotnost)
-Vyber = SelectPodmínka(Pole, lambda e: e.get("Id") > 1)
+Vyber = SelectPodmínka(Pole, lambda e: e.Id > 2)
 print("Počet :", len(Vyber))
 for znak in Vyber:
     print(znak)
@@ -105,6 +109,24 @@ Test.Velikost = 1234
 Pole.append(Stroj(1,"Jedna",100))
 Pole.append(Stroj(2,"Dva",200))
 Vyber = Select(Pole, 2)
-print(Vyber.Velikost)
+Vyber = SelectPodmínka(Pole, lambda e: e.Id > 2)
+print("Počet :", len(Vyber))
+for znak in Vyber:
+    print(znak)
+
+Pole = []
+Pole.append(Stroj(1,"Jedna",100))
+Pole.append(Stroj(2,"Dva",200))
+Pole.append(Elektro(1,"Jedna",100))
+Pole.append(Elektro(2,"Dva",200))
+Pole.append(Elektro(3,"Tři",300))
+Pole.append(Stroj(3,"Dva",200))
+Pole.append(Stroj(4,"Dva",200))
+Vyber = Select(Pole, 2)
+Vyber = SelectPodmínka(Pole, lambda e: e.Id > 2)
+print("Počet :", len(Vyber))
+for znak in Vyber:
+    print(znak)
+
 
 
